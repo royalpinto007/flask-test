@@ -30,8 +30,19 @@ summarizer_url = "https://api-inference.huggingface.co/models/utrobinmv/t5_summa
 headers = {
     "Authorization": f"Bearer {HF_TOKEN}"
 }
+from flask import Flask, render_template
 
-@app.get("/")
+app = Flask(__name__)
+
+@app.route("/")
+def start():
+    return "The MBSA Server is Running"
+
+@app.route("/mbsa")
+def mbsa():
+    return render_template('index.html')
+    
+@app.get("/hello")
 def read_root() -> str:
     companies = ["Apple", "Google", "Microsoft", "Amazon", "Facebook",
                  "Tesla", "Netflix", "Twitter", "Uber", "Lyft",
